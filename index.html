@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE PIECE Deck Share</title>
+<title>イシドーラ Share</title>
 
 <style>
 body {
@@ -31,16 +31,10 @@ header {
     overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 0 15px rgba(255,0,0,0.3);
-    transition: transform 0.2s ease;
-}
-
-.deck-card:hover {
-    transform: scale(1.02);
 }
 
 .deck-image img {
     width: 100%;
-    display: block;
 }
 
 .deck-content {
@@ -83,38 +77,74 @@ button {
 🏴‍☠️ ONE PIECE Deck Share
 </header>
 
-<div class="container">
-
-<div class="deck-card">
-<div class="deck-image">
-<img src="images/zoro.jpg" alt="ゾロ">
-</div>
-<div class="deck-content">
-<div class="deck-title">赤ゾロ速攻</div>
-<div class="deck-leader">リーダー：ロロノア・ゾロ</div>
-<button onclick="toggleDetail(this)">デッキを見る</button>
-<div class="deck-detail">
-【デッキレシピ】
-ナミ ×4
-サンジ ×4
-ルフィ ×4
-ゴードン ×4
-その他 24枚
-
-【コンセプト】
-速攻で畳みかける攻撃型構築
-</div>
-</div>
-</div>
-
-</div>
+<div class="container" id="deckContainer"></div>
 
 <script>
+
+const decks = [
+
+{
+  title: "サボンチュ",
+  leader: "赤黒サボ",
+  image: "images/sabo.jpg",
+  recipe: `ベロ・ベティ　x4
+モンキー・D・ガープ　x4
+夢打撃処理拳　x4
+革命軍総本部　x4
+コアラ　x2
+ジニー　x4
+4コアラ　x4
+4サボ　x4
+5サボ　x2
+6サボ　x4
+2000カンサボ　x4
+2000カンハック　x4
+7ゾロ　x3
+赤8ドラゴン　x2
+黒8ドラゴン　x2
+ステューシー　x2
+ロジャー　x1
+`,
+  concept: "3/22 3on 構築"
+}
+
+];
+
+function renderDecks() {
+    const container = document.getElementById("deckContainer");
+    container.innerHTML = "";
+
+    decks.forEach(deck => {
+        container.innerHTML += `
+        <div class="deck-card">
+            <div class="deck-image">
+                <img src="${deck.image}" alt="${deck.leader}">
+            </div>
+            <div class="deck-content">
+                <div class="deck-title">${deck.title}</div>
+                <div class="deck-leader">リーダー：${deck.leader}</div>
+                <button onclick="toggleDetail(this)">デッキを見る</button>
+                <div class="deck-detail">
+【デッキレシピ】
+${deck.recipe}
+
+【コンセプト】
+${deck.concept}
+                </div>
+            </div>
+        </div>
+        `;
+    });
+}
+
 function toggleDetail(button) {
     const detail = button.nextElementSibling;
     detail.style.display =
         detail.style.display === "block" ? "none" : "block";
 }
+
+renderDecks();
+
 </script>
 
 </body>
